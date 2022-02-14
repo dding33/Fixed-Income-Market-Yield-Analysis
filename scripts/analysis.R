@@ -18,6 +18,9 @@ maturity_date<-as.Date(dirty$MATURITY.DATE)
 cpn_vec <- as.numeric(clean$COUPON)
 #This is a list of dates at which we observed the closed price
 obs_date_vec <- c("2022-1-10","2022-1-11","2022-1-12","2022-1-13","2022-1-14","2022-1-17","2022-1-18","2022-1-19","2022-1-20","2022-1-21")
+#This is a vector of bonds I picked
+bond_name_vec <- c("CAN 0.5 MAR 1 2022", "CAN 0.25 AUG 1 2022", "CAN 0.25 MAR 1 2023", "CAN 0.25 AUG 1 2023", "CAN 0.75 FEB 1 2024", "CAN 0.75 OCT 1 2024", 
+                   "CAN 1.25 MAR 1 2025", "CAN 0.5 SEP 1 2025", "CAN 0.25 MAR 1 2026", "CAN 1 SEP 1 2026")
 #This is a matrix of closing prices only
 closing_matrix = matrix(c(dirty$X2022.01.010,dirty$X2022.01.011,dirty$X2022.01.012,dirty$X2022.01.013,dirty$X2022.01.014
                               ,dirty$X2022.01.017,dirty$X2022.01.018,dirty$X2022.01.019,dirty$X2022.01.020,dirty$X2022.01.021), nrow=10, ncol = 10, byrow=TRUE)
@@ -84,7 +87,7 @@ for (j in 1:10){
 #This is a vector of years
 year <- c(0,0.5,1,1.5,2,2.5,3,3.5,4,4.5)
 #This gives the first line, we want the type of curve to be overplot
-png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/YTM.png", height=250)
+png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/YTM.png", height=300, width=300)
 plot(year, ytm_matrix[1,], type='o', main='Yield Curves of 10 Selected \n Canadian Government Bonds', col='white', xlab='Years from Jan 2020', ylab='Yield Rate in decimals', ylim=c(0,0.12), width=5, height=3.5)
 #Then we top it up with the rest of lines
 #Just some colors I picked
@@ -93,7 +96,7 @@ rainbow = c("lightpink", "lightcoral", "hotpink", "magenta", "pink", "peachpuff"
 for (i in c(2:10)){
   lines(year, ytm_matrix[i,], type='o', col=rainbow[i-1])
 }
-legend("topleft", obs_date_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.5)
+legend("topleft", bond_name_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.3)
 grid()
 dev.off()
 
@@ -128,13 +131,13 @@ for (i in c(2:10))#because we already have the first bond calculated
 
 #Plot Spot Rate
 #Just like how we plotted ytm curve, we start the plot with the first line using plot() and add additional
-png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/SPOT.png", height=250)
+png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/SPOT.png", height=300, width=300)
 plot(year, spot_matrix[1,],type='o',main="Spot Curve", col='red', xlab='Years since January 2022', ylab='Spot Rate in Decimal',ylim=c(0.0005,0.004))
 for(i in 2:10){
   lines(year, spot_matrix[i,], type='o', col=rainbow[i-1],lwd=0.9)
 }
 grid()
-legend("topleft", obs_date_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.5)
+legend("topleft", bond_name_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.3)
 dev.off()
 
 #Q6
@@ -148,12 +151,12 @@ for (j in c(1:4)){
 }
 
 #Plot them with the first dot being the 1yr-1yr forward rate and the last dot being the 1yr-4yr forward rate
-png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/Forward.png", height=250)
+png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/Forward.png", height=300, width=300)
 plot(c(2,3,4,5), forward_rate[1,],type='o',main="Forward Curve", col='red', xlab='Number of Years From Jan 2022', ylab='Spot Rate in Decimal',ylim=c(0.001,0.003))
 for(i in 2:10){#And we do do this for all bonds
   lines(c(2,3,4,5), forward_rate[i,], type='o', col=rainbow[i-1],lwd=0.9)
 }
-legend("topleft", obs_date_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.5)
+legend("topleft", bond_name_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.3)
 grid()
 dev.off()
 

@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, total={6.4in, 8.53in}]{geometry}
-\usepackage{amsmath, tikz, amsfonts, bbm, mathrsfs, graphicx, amssymb, amsthm, hyperref, centernot, enumerate, bbm, xcolor, lmodern, mathdots, amsfonts, graphicx,float}
+\usepackage{amsmath, tikz, amsfonts, bbm, mathrsfs, graphicx, amssymb, amsthm, hyperref, centernot, enumerate, bbm, xcolor, lmodern, mathdots, amsfonts, graphicx,float,subfig}
 \graphicspath{ {./output/} }
 
 \title{MAT1856/APM466 Assignment 1}
@@ -32,19 +32,20 @@
 \setcounter{enumi}{3} 
     \item Please see the reference for the source of codes.
     \begin{enumerate}
-        \item Please see \ref{4a} for the plot of the yield curve.
-        \item Please see \ref{4b} for the plot of the spots curve.
-            \begin{figure}
-            \centerline{\includegraphics{YTM.png}}
-            \caption{Q4(a)}
-            \label{4a}
-            \centerline{\includegraphics{SPOT.png}}
-            \caption{Q4(b)}
-            \label{4b}
-            \centerline{\includegraphics{Forward.png}}
-            \end{figure}
-        \item Please see \ref{4c} for the plot of the forward curve. 
+        \item Please see \ref{fig:4ab} for the plot of the yield curve.
+        \item Please see \ref{fig:4ab} for the plot of the spots curve.
+         \item Please see \ref{4c} for the plot of the forward curve. 
+         
+\begin{figure}%
+    \centering
+    \subfloat{{\includegraphics[width=5cm]{YTM.png}}}%
+    \qquad
+    \subfloat{{\includegraphics[width=5cm]{SPOT.png}}}%
+    \caption{Q4(a) and (b)}%
+    \label{fig:4ab}%
+\end{figure}         
             \begin{figure}[hbt!]
+            \centerline{\includegraphics{Forward.png}}
             \caption{Q4(c)}
             \label{4c}
             \end{figure}
