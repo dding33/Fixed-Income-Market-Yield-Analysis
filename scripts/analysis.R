@@ -96,7 +96,7 @@ rainbow = c("lightpink", "lightcoral", "hotpink", "magenta", "pink", "peachpuff"
 for (i in c(2:10)){
   lines(year, ytm_matrix[i,], type='o', col=rainbow[i-1])
 }
-legend("topleft", bond_name_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.3)
+legend("topleft", obs_date_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.5)
 grid()
 dev.off()
 
@@ -137,7 +137,7 @@ for(i in 2:10){
   lines(year, spot_matrix[i,], type='o', col=rainbow[i-1],lwd=0.9)
 }
 grid()
-legend("topleft", bond_name_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.3)
+legend("topleft", obs_date_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.5)
 dev.off()
 
 #Q6
@@ -151,12 +151,12 @@ for (j in c(1:4)){
 }
 
 #Plot them with the first dot being the 1yr-1yr forward rate and the last dot being the 1yr-4yr forward rate
-png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/Forward.png", height=300, width=300)
+png(file="~/Desktop/YR4/APM466/A1/Fixed-Income-Market-Yield-Analysis/output/Forward.png", height=250, width=300)
 plot(c(2,3,4,5), forward_rate[1,],type='o',main="Forward Curve", col='red', xlab='Number of Years From Jan 2022', ylab='Spot Rate in Decimal',ylim=c(0.001,0.003))
 for(i in 2:10){#And we do do this for all bonds
   lines(c(2,3,4,5), forward_rate[i,], type='o', col=rainbow[i-1],lwd=0.9)
 }
-legend("topleft", bond_name_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.3)
+legend("topleft", obs_date_vec, lty=c(1,1), lwd =c(1,1),bty='n', col=c(rainbow,"yellow"), cex=0.4)
 grid()
 dev.off()
 
@@ -197,9 +197,10 @@ fwd <- data.frame(fwd1,fwd2,fwd3,fwd4,fwd5,fwd6,fwd7,fwd8,fwd9,fwd10)
 cov_fwd<-(cov(fwd,fwd))
 eigen(cov_fwd,symmetric = TRUE)
 
+#This will give you the latex that produces the matrices and eigens
 #xtable(cov_for_log_return)
 #xtable(cov_fwd)
 #xtable(eigen_of_yield$vectors)
-xtable(eigen_fwd$vectors)
+#xtable(eigen_fwd$vectors)
 ##############################################################
 ##########################################################
